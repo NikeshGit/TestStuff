@@ -1,7 +1,7 @@
 
 <html>
 <head>this is a header
-	adding an embedded cascading stylesheet, cascading from top to bottom. including a class specified by .classname and id specified by #id, and entity without either. IDs do not cascade as there can be only one and they trump all classes
+	adding an embedded cascading stylesheet, cascading from top (highest priority) to bottom. including a class specified by .classname and id specified by #id, and entity without either. IDs do not cascade as there can be only one and they trump all classes
 	<style type="text/css">
 		body {background-color: lightgray;
 			color:green;}
@@ -47,7 +47,12 @@
 		console.log(myArray.length); //4
 		console.log(myArray[2]); 
 		myArray.push("e"); //add onto array
-		console.log(myArray.length); //5
+		console.log(myArray.length); //
+
+		function runAlert()
+		{
+			alert("i've been called");
+		}
 
 
 		//functions, parameters in brackets
@@ -199,6 +204,7 @@
 	<br>
 	br is a break.
 	<br> 
+	<button class="btnAlert" onclick="runAlert()">JSFunctionCalleg</button>
 	<p class="long-text">
 	when using div as groupings, should create a class that logically groups them.<br>
 	you can have as many classes as you want and they are reusable. However ID groupings are unique.<br>
