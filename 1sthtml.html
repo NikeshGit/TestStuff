@@ -1,0 +1,278 @@
+
+<html>
+<head>this is a header
+	adding an embedded cascading stylesheet, cascading from top to bottom. including a class specified by .classname and id specified by #id, and entity without either. IDs do not cascade as there can be only one and they trump all classes
+	<style type="text/css">
+		body {background-color: lightgray;
+			color:green;}
+		p {color:rgb(100,125,225);}
+		#picturegroup2 {border:3px solid red;}
+		.picture-group {width: 100; margin:5px; border:1px solid green; float: left;}
+		.kitten-pic {padding-bottom: 10px;}
+		table {border-collapse: collapse;}
+		th,tr, td {border: 1px solid black;}
+		section {font-weight: bold; font-size: 18px;}
+		.long-text {height: 40px; overflow:scroll;}
+
+	</style>
+ 	<script>
+		//this is now javascript
+		//first showing output mechanisms
+		alert("Hello alert"); //pop up dialog
+		document.write("<br> Hello document"); //writes to the page in html
+		console.log("Hello console"); //outputs to console once build is complete or inspect
+
+
+		//define variables, js is dynamic (no need to define variable type)
+		var myVar = "Nik";
+		var myInt = 5;
+
+		//for-loop example
+		for(var i=1;i<myInt;i++)
+		{
+			console.log(myVar + " " + i);
+		}
+
+		if(myInt == 5)
+		{
+			console.log("matches");
+		}
+
+		var myIntText = "5";
+		console.log(myInt == myIntText); //true even if comparing int and string. to check type, use ===
+		console.log(myInt === myIntText);
+
+		//arrays
+		var myArray = ["a","b","c","d"];
+		console.log(myArray.length); //4
+		console.log(myArray[2]); 
+		myArray.push("e"); //add onto array
+		console.log(myArray.length); //5
+
+
+		//functions, parameters in brackets
+		var newFunc = (listy) => 
+		{
+			for(var i=0; i<listy.length; i++)
+			{
+				alert("hello " + listy[i]);
+			}
+			
+		};
+		var xlist = ["fruity","monkey"];
+		newFunc(xlist);
+
+		//objects can be held as json
+		var myPerson = {
+			Name: "Nikesh",
+			Age: 39,
+			Salary: 200000,
+			getSalary: function() {return this.Salary;}
+		}
+
+		console.log(myPerson.getSalary());
+
+	</script>
+ 	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'></script>
+	<script type="text/javascript">
+		//rather than using native JS, JQuery is a framework that can help do things quickly. $ is same as writing JQuery
+		//$(document).ready(function() will run once the page Document Object Model (DOM) is ready for JS to execute
+		$(document).ready(function(){
+		$(".long-text").text("hello").css("background-color","orange"); //can chain, so change text and style
+
+		$("li").css("background-color","blue");
+
+
+		$(".myInput").val("ButtonMoon");
+
+		//event to handle button
+		$(".myButton").click(function()
+		{
+			var myEnteredVal = $(".myInput").val();
+			alert("heyyyyy  " + myEnteredVal);
+			$(".myButton").text("ive been had");
+			var mySelectedAnimal = $(".myOption").val();
+			$(".myInput").val(mySelectedAnimal);
+
+			//show/hide controls
+			if (mySelectedAnimal != "cats")
+			{
+				$(".kitten-pic").hide();
+			}
+			else
+			{
+				$(".kitten-pic").show();
+			};
+
+		});
+
+
+		console.log($.fn);//print all available functions
+
+
+
+		//AJAX - aynchronous javascript and xml. to call a server and do something in the background
+		//this example is using a webservice call to get data when a button is clicked
+		$(".myButtonGetText").click(function()
+		{
+		$.ajax({
+				"type":"GET",
+				"url":"https://api.meetup.com/2/cities",
+				success: function(response) //this sets a callback. if successful, executes another function with the returned data
+				{
+					
+					$(".getText").text(JSON.stringify(response));
+					
+
+					//can also refer the the returned json as an object. e.g. the json response has a results element which then has a city element under it
+					for(var i=0;i<response.results.length;i++)
+					{
+						console.log(response.results[i].city);
+					}
+
+				}
+
+			});
+		
+		});
+
+
+
+		$(".newButtonReddit").click(function()
+		{
+			$.ajax({
+				"type":"GET",
+				"url":"https://www.reddit.com/r/aww/search.json?q=tortoise&restrict_sr=true",
+				success: function(response)
+				{
+					for(var i=0;i<response.data.children.length;i++)
+					{
+						var imageTag="<img src='" + response.data.children[i].data.thumbnail + "'/>" 
+						$(".TortoisePicsPlaceholder").append(imageTag); //append html image tags in the section
+					}
+				}
+
+			})
+		});
+
+
+	});	
+	</script> 
+
+</head>
+<body>
+	<h1>header 1 (up to 6)</h1>
+	<p>this is a paragraph</p>
+	<div>this is a container, wrap each block up in divs</div>
+	<ul>unordered bullet list
+		<li>one item</li>
+		<li>two item</li>
+	</ul>
+	<div>
+		</ol>ordered numbered list
+			<li> <span> one </span> item. span is used to wrap words/lines like div but smaller used in css</li>
+			<li> <span> two </span> item</li>
+		</ol>
+	</div>
+	<div>
+		<article>like a container, but an independant part of the page, should be standalone, e.g. a post/comment which could be distributed to other pages
+			<address>author information</address>
+			<time>22 October 2018</time>
+			<section>
+				a chunk of related content
+			</section>
+			<footer>any footer information related to the article</footer>
+		</article>
+	</div>
+	<p>
+		this is <strong> bold </strong> or <em> italics </em>. b and i are restrictive to change later
+	</p>
+
+
+	<div>
+		input is a self-closing tag
+		<input class="myInput" />
+	</div>
+	<p>and a picture, which shows an element img with an attribute src</p>
+	<img src="http://placekitten.com/100/100" />
+
+	<br>
+	br is a break.
+	<br> 
+	<p class="long-text">
+	when using div as groupings, should create a class that logically groups them.<br>
+	you can have as many classes as you want and they are reusable. However ID groupings are unique.<br>
+	these are used to create containers where either CSS style or JS behaviour will impact them<br>
+	</p>
+	<br>
+	<br>
+	<div id="picturegroup1" class="picture-group">
+		<img src="http://placekitten.com/50/50" class="kitten-pic" />
+		<img src="http://placekitten.com/60/60" class="kitten-pic" />
+	</div>
+		<div id="picturegroup2"  class="picture-group">
+		<img src="http://placekitten.com/40/40" class="kitten-pic" />
+		<img src="http://placekitten.com/70/70" class="kitten-pic" />
+	</div>
+		</div>
+		<div id="picturegroup3"  class="picture-group">
+		<img src="http://placekitten.com/30/30" class="kitten-pic" />
+		<img src="http://placekitten.com/80/80" class="kitten-pic" />
+	</div>
+
+	<table>
+		<caption>a table example</caption>
+		<thead>
+			<tr>
+				<th colspan="2">employee list 2018</th>
+				<td>test</td>
+			</tr>
+		</thead>
+		<tr>
+			<th>Name</th>
+			<th>age</th>
+			<th>salary</th>
+		</tr> 
+		<tr> 
+			<td>Bob</td> 
+			<td>23</td>
+			<td>25000</td> 
+		</tr> 
+		<tr> 
+			<td>Michelle</td> 
+			<td>34</td>
+			<td>45000</td> 
+		</tr> 
+		<tfoot>
+			<tr>
+				<th colspan="2">Total</th>
+				<td>70000</td>
+			</tr>
+	</table>
+
+	<select class="myOption">
+		<option>tortoise</option>
+		<option selected="selected">cats</option>
+		<option>dogs</option>
+	</select>
+
+	<button class="myButton">Click me friend</button>
+	<br>
+
+	<button class="myButtonGetText">async data</button>
+	<br>
+	<p class="getText">get text</p>
+
+	<br>
+	<hr>
+	<br>
+	<button class="newButtonReddit">esiotrot</button>
+	<br>
+	<p>
+	<p class="TortoisePicsPlaceholder">murtle!</p>
+
+</body>
+<footer>this is a footer</footer>
+
+</html>
+
