@@ -2,5 +2,6 @@
 
 
 print('hello')
-x = input('enter someting')
+x = input()
 print('you wrote ' + x)
+
