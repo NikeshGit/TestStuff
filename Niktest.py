@@ -57,3 +57,4 @@ def updateCounter(c):
 
 def printCounter():
     print(count) #try printing global variable once set
+
