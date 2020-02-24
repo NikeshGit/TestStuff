@@ -1,6 +1,6 @@
 """Nik test module built in playground""" #use docstrings to put documentation on the api. Call help(module name) to get that in python3 live mode
 import json #import modules needed
-from requests import get #import just the function needed. import this will return the zen of python - lol
+from requests import get #import just the function needed. "import this" will return the zen of python - lol
 
 count = 0 #global variable
  
@@ -98,6 +98,9 @@ def reviewCollections():
     newDict.update({2:'was'}) #update the value at a key
     for key in newDict:
         print(f"{key} => {newDict[key]}")   #can loop through dictionary using for loop. easy to return the value using f-string and pass the function
+    newDict = {"a":"apple","b":"banana","c":"carrot"} #if both key and value are strings, can unpack them as follows
+    for key, val in newDict:
+        print(key + '-' + val)
 
     #sets - can be used to take a set (which will remove duplicates) and compare against another set
     set1 = {"nik","rita","nils","viaan"}
@@ -120,4 +123,61 @@ def exceptionManagement(xx): #demonstrates exception when you pass a non integer
     except ValueError:  #you can see the type of error in the failed call stack
         print("conversion failed")
         return -1
+
+
+def shortHandCollections():
+    #this is using comprehensions where you can perform some action on each item in a collection
+    words = "this is a long sentance to show you what you can do".split() #puts words in a list
+    lenWords = [len(word) for word in words] #this will create a new list lenWords with the length of each word in words
+                                            #written list this: [functiononitem for item in items]
+                                            #can do same with sets using curly braces
+                                            #and dictionaries
+    countryToCapital = {'UK':'London','Brazil':'Brasila','Spain':'Madrid','Germany':'Berlin'}
+    capitalToCountry = {capital:country for country, capital in countryToCapital.items()} #makes a new dictionary where the key is the opposite of the other
+
+def generatorFunction():
+    #generator functions - python iterable
+    yield 1
+    yield 2
+    yield 3
+
+def useGenerator():
+    g = generatorFunction()
+    print(next(g)) #allows you to iterate over each yield in generator function
+    print(next(g))
+    print(next(g))
+
+
+class Phone: #class definition
+    """example of a class definition"""
+    def callSomeone(self, phoneNumber): #methods are defined like functions but first parameter is self(i.e. the object) but not passed. Initialise: ip = Phone. call: ip.callSomeone(123)
+        self._phoneNumber = phoneNumber  #self references the object
+        print("calling " + str(self._phoneNumber))
+        
+    def __init__(self, emergencyNumber, phoneCase): #there are no constructors in python. Just initialisers which execute first for any new object after the object is created
+        self._phoneNumber = emergencyNumber       #any attributes for the object should be defined in the init since this brings them into being (they will be globally available as against self)
+        print("just been initialised with number: " + str(self._phoneNumber)) #use _attributeName to avoid clashes with methods and indicate this shouldnt be directly accessed
+        self.__pinCode = 1234                     # _ in front of attribute does not prevent others from accessing it. To do this add double __ and use getters/setters
+        self._phoneCase = phoneCase   #but even this doesnt prevent someone accessing it by: object._class__attribute, e.g. ip._Phone__pinCode (so encapsulation is trusted)
+    def setPin(self, val):  #setter method to change private pin
+        self.__pinCode = val
+    
+    def getPin(self):       #getter method to return private pin
+        return self.__pinCode
+
+
+class PhoneCase:  #this is another class, and is used in the phone class above (see the initialiser). Called like this: ip=Niktest.Phone(999, Niktest.PhoneCase(screenCover=False))
+    def __init__(self, material="plastic", screenCover=True):  #now clients of phone dont need to know about phonecase class
+        self._material = material
+        self._screenCover = screenCover
+        
+class IPhone7(Phone): #inheritence from a base class
+    def __init__(self): #this is a form of method overriding and will overide the initialiser in the base class so to keep it, call it using super()
+        super().__init__(999, PhoneCase()) #call parent class methods
+        print("iPhone7")
+
+class SamsungGalaxy(Phone): #now that we have 2 types of the Phone class, we can show polymorphism by creating both phone types and putting them in a list of phones:
+    def __init__(self):              #ip = iPhone7()... ss = samsungGalaxy()...   phoneList = [ip, ss]...  for phone in phoneList: print(phone.getPin())
+        super().__init__(999, PhoneCase())  #parent method still works as both ip and ss are phones
+        print("samsung galaxy")
 
