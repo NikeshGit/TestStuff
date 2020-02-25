@@ -11,7 +11,7 @@ def runThis(url): #define a function, with parameters to be passed in
 
     r = [2,4,6] #this is a list. lists are mutable so if you make s = r and update s[1] = 4, then both r and s will change
 
-    if y == "hi": #for statement. This demonstrates the importance if indentation
+    if y == "hi": #if statement. This demonstrates the importance if indentation
         print("this wont print")
 
     inputFile = open("input.json", "r") #open file in read mode. later in write mode
@@ -181,3 +181,22 @@ class SamsungGalaxy(Phone): #now that we have 2 types of the Phone class, we can
         super().__init__(999, PhoneCase())  #parent method still works as both ip and ss are phones
         print("samsung galaxy")
 
+
+def fileIOExamples():
+    """This is examples of using resources"""
+    openFile = open("input.json", "r") #opens a file, this is a base library already available
+    print(openFile.read())      #reads from the file
+    openFile.close()
+
+    openFile = open("input.json,","w") #writes to the file (but doesnt retain content - use append for that)
+    openFile.write("hello")
+    openFile.close() #must close the file once done
+
+    openFile = open("input.json", "r") #file object support iteration so can use for loops to go through lines
+    for line in openFile:
+        print(line)
+    openFile.close()       #if there is an error on the file printline, then it will leave the stream open. to prevent this you can use Try: open...  Finally: close() but this is verbose
+
+    with open("input.json","j") as openFile:  #use with blocks to make it easier to pair opens with close and will clean up resources
+        print(openFile.read())
+ 
