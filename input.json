@@ -1,1 +1,6 @@
-hello
+{
+	
+	"name": "Nikesh",
+	"Job": "Programmer",
+	"Hobbies": ["programming","learning","games"]
+}
