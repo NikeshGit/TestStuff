@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Niktest &#8212; Niktest 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for Niktest</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Nik test module built in playground&quot;&quot;&quot;</span>  <span class="c1"># use docstrings to put </span>
+                                           <span class="c1"># documentation on the api. Call help(module name) to get that in python3 live mode. should be on module, class, method, function</span>
+<span class="kn">import</span> <span class="nn">json</span>  <span class="c1"># import modules needed</span>
+<span class="kn">from</span> <span class="nn">requests</span> <span class="kn">import</span> <span class="n">get</span>  <span class="c1"># import just the function needed. </span>
+                          <span class="c1"># &quot;import this&quot; will return the zen of python - lol</span>
+<span class="c1">#  also import the pep8 linting. this will ensure code quality standards are maintained</span>
+<span class="c1">#  import spinx to generate documentation. Add a folder to hold the docs and run sphinx-quickstart in that folder. then generate docs using the docstrings in the code </span>
+<span class="c1">#  by using sphinx-apidoc -o docs directory      (where the project lives). some updates on the conf.py and finally &quot;make clean html&quot; in the docs directory</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># global variable</span>
+ 
+
+<div class="viewcode-block" id="runThis"><a class="viewcode-back" href="../Niktest.html#Niktest.runThis">[docs]</a><span class="k">def</span> <span class="nf">runThis</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>  <span class="c1"># define a function, with parameters to be passed</span>
+    <span class="sd">&quot;&quot;&quot;fetch time of a region&quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># variable assignment is dynamic - it is defined at runtime not compile time</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>  <span class="c1"># strings are immutable objects, so if you make y=x and change x, y wont change as still pointing to other object. if y value is changed, old object is orphaned and garbage collected</span>
+
+    <span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>  <span class="c1"># this is a list. lists are mutable so if you make s = r and update s[1] = 4, then both r and s will change</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="s2">&quot;hi&quot;</span><span class="p">:</span>  <span class="c1"># if statement. This demonstrates the importance if indentation</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;this wont print&quot;</span><span class="p">)</span>
+
+    <span class="n">inputFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;input.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>  <span class="c1"># open file in read mode. later in write mode</span>
+    <span class="n">outputFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">inputFile</span><span class="p">)</span>  <span class="c1"># uses json module to loop through in list</span>
+    <span class="k">for</span> <span class="n">hobby</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;Hobbies&#39;</span><span class="p">]:</span>  <span class="c1"># for loop</span>
+        <span class="n">outputFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">hobby</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># this is a comment with a hash character</span>
+
+    <span class="n">inputFile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  <span class="c1"># remember to close any open streams</span>
+    <span class="n">outputFile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>  <span class="c1"># an example of a http request to an api. since we imported just get from requests, fully qualified name is not required</span>
+    <span class="n">obj2</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">obj2</span><span class="p">[</span><span class="s1">&#39;timezone&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;/n&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj2</span><span class="p">[</span><span class="s1">&#39;utc_datetime&#39;</span><span class="p">]))</span>  <span class="c1"># return from the function</span></div>
+
+
+<div class="viewcode-block" id="printTime"><a class="viewcode-back" href="../Niktest.html#Niktest.printTime">[docs]</a><span class="k">def</span> <span class="nf">printTime</span><span class="p">(</span><span class="n">timer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;print the time&quot;&quot;&quot;</span>  <span class="c1"># api comments shown on help(modulename) or help(modulename.functionname)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span>  <span class="c1"># print statement</span></div>
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../Niktest.html#Niktest.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;main method to get a time&quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">runThis</span><span class="p">(</span><span class="s2">&quot;http://worldtimeapi.org/api/timezone/Europe/London&quot;</span><span class="p">)</span>  <span class="c1"># just a comment to say all parameters are passed by ref, not by val</span>
+    <span class="n">printTime</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>  <span class="c1"># this will ensure it always runs if required</span>
+    <span class="n">main</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="banner"><a class="viewcode-back" href="../Niktest.html#Niktest.banner">[docs]</a><span class="k">def</span> <span class="nf">banner</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">):</span>  <span class="c1"># passed the 2nd parameter with a default (so its optional). rule: always use immutable objects for defaults</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="o">*</span> <span class="n">border</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">message</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">line</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="updateCounter"><a class="viewcode-back" href="../Niktest.html#Niktest.updateCounter">[docs]</a><span class="k">def</span> <span class="nf">updateCounter</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+    <span class="c1"># count = c #going back to the global variable called count. This will only create a new local variable unless you refer to the global one</span>
+    <span class="k">global</span> <span class="n">count</span>  <span class="c1"># use global to reference the global variable. this will update the global count variable so when printed using printCounter it works as you&#39;d expect</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">c</span></div>
+
+
+<div class="viewcode-block" id="callBanner"><a class="viewcode-back" href="../Niktest.html#Niktest.callBanner">[docs]</a><span class="k">def</span> <span class="nf">callBanner</span><span class="p">():</span>
+    <span class="n">banner</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;hello friend&quot;</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="s2">&quot;@&quot;</span><span class="p">)</span>  <span class="c1"># passing parameters by name rather than position</span></div>
+
+
+<div class="viewcode-block" id="printCounter"><a class="viewcode-back" href="../Niktest.html#Niktest.printCounter">[docs]</a><span class="k">def</span> <span class="nf">printCounter</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>  <span class="c1"># try printing global variable once set</span></div>
+
+
+<div class="viewcode-block" id="reviewCollections"><a class="viewcode-back" href="../Niktest.html#Niktest.reviewCollections">[docs]</a><span class="k">def</span> <span class="nf">reviewCollections</span><span class="p">():</span>
+    <span class="c1"># tuple - immutable sequence of objects (using brackets)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Nikesh&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">3.55</span><span class="p">)</span> 
+    <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>  <span class="c1"># print each item in a loop</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">if</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">t</span><span class="p">:</span>  <span class="c1"># look for a specific item</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;its in there&quot;</span><span class="p">)</span>
+
+    <span class="c1"># strings</span>
+    <span class="nb">len</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">)</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="s1">&#39;;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;pink&#39;</span><span class="p">])</span>  <span class="c1"># join is more efficient than + and has additional power - e.g. join each element in a list with a separator</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span>
+    <span class="n">colors</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>  <span class="c1"># split the string based on a value in the string and put it in list format</span>
+    <span class="s1">&#39;hellofriend&#39;</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s1">&#39;of&#39;</span><span class="p">)</span>  <span class="c1"># partition a string on a value into 3 - before, at and after</span>
+    <span class="s2">&quot;this is an </span><span class="si">{0}</span><span class="s2"> of a format </span><span class="si">{1}</span><span class="s2">!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;example&quot;</span><span class="p">,</span> <span class="s2">&quot;string&quot;</span><span class="p">)</span>  <span class="c1"># can use format to insert variables into a string based on position</span>
+    <span class="s2">&quot;this is an </span><span class="si">{eg}</span><span class="s2"> of a format </span><span class="si">{type}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eg</span><span class="o">=</span><span class="s2">&quot;example&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;string&quot;</span><span class="p">)</span>  <span class="c1"># or based on named variables</span>
+    <span class="n">eg</span> <span class="o">=</span> <span class="s2">&quot;example&quot;</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;string&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;this is an </span><span class="si">{eg}</span><span class="s2"> of a format </span><span class="si">{type}</span><span class="s2"> using f-strings with {printTime(&#39;functioncall&#39;)}&quot;</span>  <span class="c1"># f-strings are less verbose and can pass variables in as well as functions</span>
+
+    <span class="c1"># lists</span>
+    <span class="n">newList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>  <span class="c1"># list with square brackets</span>
+    <span class="n">newList</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># index from start returns 1</span>
+    <span class="n">newList</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># index from end returns 6</span>
+    <span class="n">newList</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>  <span class="c1"># can slice up a list returns 3, 4, 5</span>
+    <span class="n">newList</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># returns position of the indexed value</span>
+    <span class="n">newList</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># removes a value from the list based on value</span>
+    <span class="n">newList</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>  <span class="c1"># reverses the list</span>
+    <span class="n">newList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>  <span class="c1"># sorts the list</span>
+
+    <span class="c1"># dictionaries - key and value pairs</span>
+    <span class="n">newDict</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;this&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;is&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;dictionary&quot;</span><span class="p">}</span>  <span class="c1"># curly braces with key:value</span>
+    <span class="n">newDict</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>  <span class="c1"># returns value at key</span>
+    <span class="n">newDict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;was&#39;</span><span class="p">})</span>  <span class="c1"># update the value at a key</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">newDict</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{key}</span><span class="s2"> =&gt; </span><span class="si">{newDict[key]}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># can loop through dictionary using for loop. easy to return the value using f-string and pass the function</span>
+    <span class="n">newDict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="s2">&quot;carrot&quot;</span><span class="p">}</span>  <span class="c1"># if both key and value are strings, can unpack them as follows</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">newDict</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">key</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">val</span><span class="p">)</span>
+
+    <span class="c1"># sets - can be used to take a set (which will remove duplicates) and compare against another set</span>
+    <span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;nik&quot;</span><span class="p">,</span> <span class="s2">&quot;rita&quot;</span><span class="p">,</span> <span class="s2">&quot;nils&quot;</span><span class="p">,</span> <span class="s2">&quot;viaan&quot;</span><span class="p">}</span>
+    <span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;nils&quot;</span><span class="p">,</span> <span class="s2">&quot;viaan&quot;</span><span class="p">,</span> <span class="s2">&quot;surina&quot;</span><span class="p">,</span> <span class="s2">&quot;nyal&quot;</span><span class="p">}</span>
+    <span class="n">set1</span>
+    <span class="n">set2</span>
+    <span class="n">set1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;murtle&quot;</span><span class="p">)</span>  <span class="c1"># adds new value to set</span>
+    <span class="n">set1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>  <span class="c1"># bring back the union of 2 sets</span>
+    <span class="n">set1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>  <span class="c1"># those in set1 and in set 2</span>
+    <span class="n">set1</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>  <span class="c1"># everything in first set and not in second set</span>
+    <span class="n">set1</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>  <span class="c1"># in first set or second set but not both</span>
+    <span class="n">set3</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;nik&quot;</span><span class="p">,</span> <span class="s2">&quot;rita&quot;</span><span class="p">,</span> <span class="s2">&quot;murtle&quot;</span><span class="p">}</span>
+    <span class="n">set3</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">set1</span><span class="p">)</span>  <span class="c1"># checks if a set is a subset of another - this will return true</span></div>
+
+
+<div class="viewcode-block" id="exceptionManagement"><a class="viewcode-back" href="../Niktest.html#Niktest.exceptionManagement">[docs]</a><span class="k">def</span> <span class="nf">exceptionManagement</span><span class="p">(</span><span class="n">xx</span><span class="p">):</span>  <span class="c1"># demonstrates exception when you pass a non integer or non number string</span>
+    <span class="sd">&quot;&quot;&quot;this is an example of working with exceptions&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>  <span class="c1"># you can see the type of error in the failed call stack</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;conversion failed&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="shortHandCollections"><a class="viewcode-back" href="../Niktest.html#Niktest.shortHandCollections">[docs]</a><span class="k">def</span> <span class="nf">shortHandCollections</span><span class="p">():</span>
+    <span class="c1"># this is using comprehensions where you can perform some action on each item in a collection</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="s2">&quot;this is a long sentance to show you what you can do&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>  <span class="c1"># puts words in a list</span>
+    <span class="n">lenWords</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>  <span class="c1"># this will create a new list lenWords with the length of each word in words</span>
+                                            <span class="c1"># written list this: [functiononitem for item in items]</span>
+                                            <span class="c1"># can do same with sets using curly braces</span>
+                                            <span class="c1"># and dictionaries</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">lenWords</span><span class="p">)</span>
+    <span class="n">countryToCapital</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;UK&#39;</span><span class="p">:</span> <span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="s1">&#39;Brazil&#39;</span><span class="p">:</span> <span class="s1">&#39;Brasila&#39;</span><span class="p">,</span> <span class="s1">&#39;Spain&#39;</span><span class="p">:</span> <span class="s1">&#39;Madrid&#39;</span><span class="p">,</span> <span class="s1">&#39;Germany&#39;</span><span class="p">:</span> <span class="s1">&#39;Berlin&#39;</span><span class="p">}</span>
+    <span class="n">capitalToCountry</span> <span class="o">=</span> <span class="p">{</span><span class="n">capital</span><span class="p">:</span> <span class="n">country</span> <span class="k">for</span> <span class="n">country</span><span class="p">,</span> <span class="n">capital</span> <span class="ow">in</span> <span class="n">countryToCapital</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>  <span class="c1"># makes a new dictionary where the key is the opposite of the other</span>
+    <span class="k">return</span> <span class="n">capitalToCountry</span></div>
+
+
+<div class="viewcode-block" id="generatorFunction"><a class="viewcode-back" href="../Niktest.html#Niktest.generatorFunction">[docs]</a><span class="k">def</span> <span class="nf">generatorFunction</span><span class="p">():</span>
+    <span class="c1"># generator functions - python iterable</span>
+    <span class="k">yield</span> <span class="mi">1</span>
+    <span class="k">yield</span> <span class="mi">2</span>
+    <span class="k">yield</span> <span class="mi">3</span></div>
+
+
+<div class="viewcode-block" id="useGenerator"><a class="viewcode-back" href="../Niktest.html#Niktest.useGenerator">[docs]</a><span class="k">def</span> <span class="nf">useGenerator</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;generator&quot;&quot;&quot;</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">generatorFunction</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>  <span class="c1"># allows you to iterate over each yield in generator function</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">g</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Phone"><a class="viewcode-back" href="../Niktest.html#Niktest.Phone">[docs]</a><span class="k">class</span> <span class="nc">Phone</span><span class="p">:</span>  <span class="c1"># class definition</span>
+    <span class="sd">&quot;&quot;&quot;example of a class definition&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Phone.callSomeone"><a class="viewcode-back" href="../Niktest.html#Niktest.Phone.callSomeone">[docs]</a>    <span class="k">def</span> <span class="nf">callSomeone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phoneNumber</span><span class="p">):</span>  <span class="c1"># methods are defined like functions but first parameter is self(i.e. the object) but not passed. Initialise: ip = Phone. call: ip.callSomeone(123)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_phoneNumber</span> <span class="o">=</span> <span class="n">phoneNumber</span>  <span class="c1"># self references the object</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;calling &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_phoneNumber</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">emergencyNumber</span><span class="p">,</span> <span class="n">phoneCase</span><span class="p">):</span>  <span class="c1"># there are no constructors in python. Just initialisers which execute first for any new object after the object is created</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_phoneNumber</span> <span class="o">=</span> <span class="n">emergencyNumber</span>  <span class="c1"># any attributes for the object should be defined in the init since this brings them into being (they will be globally available as against self)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;just been initialised with number: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_phoneNumber</span><span class="p">))</span>  <span class="c1"># use _attributeName to avoid clashes with methods and indicate this shouldnt be directly accessed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pinCode</span> <span class="o">=</span> <span class="mi">1234</span>  <span class="c1"># _ in front of attribute does not prevent others from accessing it. To do this add double __ and use getters/setters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_phoneCase</span> <span class="o">=</span> <span class="n">phoneCase</span>  <span class="c1"># but even this doesnt prevent someone accessing it by: object._class__attribute, e.g. ip._Phone__pinCode (so encapsulation is trusted)</span>
+        
+<div class="viewcode-block" id="Phone.setPin"><a class="viewcode-back" href="../Niktest.html#Niktest.Phone.setPin">[docs]</a>    <span class="k">def</span> <span class="nf">setPin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>  <span class="c1"># setter method to change private pin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__pinCode</span> <span class="o">=</span> <span class="n">val</span></div>
+    
+<div class="viewcode-block" id="Phone.getPin"><a class="viewcode-back" href="../Niktest.html#Niktest.Phone.getPin">[docs]</a>    <span class="k">def</span> <span class="nf">getPin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># getter method to return private pin</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pinCode</span></div></div>
+
+
+<div class="viewcode-block" id="PhoneCase"><a class="viewcode-back" href="../Niktest.html#Niktest.PhoneCase">[docs]</a><span class="k">class</span> <span class="nc">PhoneCase</span><span class="p">:</span>  <span class="c1"># this is another class, and is used in the phone class above (see the initialiser). Called like this: ip=Niktest.Phone(999, Niktest.PhoneCase(screenCover=False))</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="s2">&quot;plastic&quot;</span><span class="p">,</span> <span class="n">screenCover</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>  <span class="c1"># now clients of phone dont need to know about phonecase class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_material</span> <span class="o">=</span> <span class="n">material</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_screenCover</span> <span class="o">=</span> <span class="n">screenCover</span></div>
+
+
+<div class="viewcode-block" id="IPhone7"><a class="viewcode-back" href="../Niktest.html#Niktest.IPhone7">[docs]</a><span class="k">class</span> <span class="nc">IPhone7</span><span class="p">(</span><span class="n">Phone</span><span class="p">):</span>  <span class="c1"># inheritence from a base class</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># this is a form of method overriding and will overide the initialiser in the base class so to keep it, call it using super()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mi">999</span><span class="p">,</span> <span class="n">PhoneCase</span><span class="p">())</span>  <span class="c1"># call parent class methods</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;iPhone7&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SamsungGalaxy"><a class="viewcode-back" href="../Niktest.html#Niktest.SamsungGalaxy">[docs]</a><span class="k">class</span> <span class="nc">SamsungGalaxy</span><span class="p">(</span><span class="n">Phone</span><span class="p">):</span>  <span class="c1"># now that we have 2 types of the Phone class, we can show polymorphism by creating both phone types and putting them in a list of phones:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># ip = iPhone7()... ss = samsungGalaxy()...   phoneList = [ip, ss]...  for phone in phoneList: print(phone.getPin())</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mi">999</span><span class="p">,</span> <span class="n">PhoneCase</span><span class="p">())</span>  <span class="c1"># parent method still works as both ip and ss are phones</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;samsung galaxy&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="fileIOExamples"><a class="viewcode-back" href="../Niktest.html#Niktest.fileIOExamples">[docs]</a><span class="k">def</span> <span class="nf">fileIOExamples</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;This is examples of using resources&quot;&quot;&quot;</span>
+    <span class="n">openFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;input.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>  <span class="c1"># opens a file, this is a base library already available</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">openFile</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>  <span class="c1"># reads from the file</span>
+    <span class="n">openFile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">openFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;input.json,&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>  <span class="c1"># writes to the file (but doesnt retain content - use append for that)</span>
+    <span class="n">openFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+    <span class="n">openFile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  <span class="c1"># must close the file once done</span>
+
+    <span class="n">openFile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;input.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>  <span class="c1"># file object support iteration so can use for loops to go through lines</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">openFile</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="n">openFile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  <span class="c1"># if there is an error on the file printline, then it will leave the stream open. to prevent this you can use Try: open...  Finally: close() but this is verbose</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;input.json&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">openFile</span><span class="p">:</span>  <span class="c1"># use with blocks to make it easier to pair opens with close and will clean up resources</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">openFile</span><span class="o">.</span><span class="n">read</span><span class="p">())</span></div>
+ 
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Niktest</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Nikesh Shah.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
