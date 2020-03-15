@@ -87,6 +87,7 @@ def callBanner():
 
 
 def printCounter():
+
     print(count)  # try printing global variable once set
 
 
